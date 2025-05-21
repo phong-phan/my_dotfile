@@ -119,12 +119,6 @@ function ta() {
 function spamchk(){
 	amispammer -i $1
 }
-# Fast SSH server:
-function f(){
-	cd  /home/$USER/Custom/passh
-	source .env/bin/activate
-	bash sshtoserver.sh $1
-}
 #mkdir and cd at the same time
 function mkcd () {
 	mkdir "$1"
@@ -163,19 +157,6 @@ function st() {
   echo "__________"
   yes ""|openssl s_client --servername $1 -connect $1:465  |  openssl x509 -text  | grep  "After\|Subject:"
 }
-# Checking server popular ports:
-function cn(){
-  bash /home/$USER/Custom/daily/server_port_status.sh $1
-}
-#default ssh to server, if no second param passed-in, default ssh port 22 will be used, else another port will be used
-# re: redhat based
-# de: debian based
-function re() {
-		ssh  root@$1 -p ${2:-22}
-}
-function de() {
-		ssh  u1@$1 -p ${2:-22}
-}
 # Time conversion:
 function poc() {
 	date -d $1 +"%s"
@@ -185,25 +166,6 @@ function htime() {
 }
 function ctime(){
   date +%s -d $1
-}
-function f() {
-	cd /home/$USER/Custom/passh
-	bash sshtoserver.sh $1
-}
-function c() {
-	python3 /home/$USER/Desktop/pythonlearning/sachk.py $1
-}
-function t() {
-	python3 /home/$USER/Desktop/pythonlearning/report/tracker.py $1 $2
-}
-function ml() {
-	if [ $# -eq 1 ]; then
-		python3 /home/$USER/Desktop/pythonlearning/report/maillog.py $1
-	elif [ $# -eq 3 ]; then
-		python3 /home/$USER/Desktop/pythonlearning/report/maillog.py $1 $2 $3
-	else
-		echo "Usage: ml ip id mode  OR ml ip"
-	fi
 }
 complete -o default -F __start_microk8s.kubectl k
 export PATH=$HOME/.local/bin:/usr/bin/python3:/usr/local/go/bin:$HOME/.cargo/bin:/home/linuxbrew/.linuxbrew/bin:/opt/nvim-linux64/bin:$HOME/.vim/bundle/vim-superman/bin:$PATH
